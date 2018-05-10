@@ -19,7 +19,7 @@ tasks = [
 
 @app.route('/')
 def index():
-    return 'Hello,world!'
+    return 'Hello,world,flask!'
 
 
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
