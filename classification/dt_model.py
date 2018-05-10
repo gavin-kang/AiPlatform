@@ -1,4 +1,4 @@
-﻿  # -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 # 构建并测试CART决策树模型
 
 import pandas as pd  # 导入数据分析库
@@ -9,8 +9,6 @@ from sklearn.tree import DecisionTreeClassifier  # 导入决策树模型
 # 请输入：
 print('请输入数据集：')
 print('请输入决策树最大树深度：')
-print('                                          ')
-print('---------------- 结果 ------------------')
 
 
 datafile = '../data/model.xls'  # 数据名
