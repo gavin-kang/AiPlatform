@@ -12,6 +12,8 @@ import json
 db = redis.StrictRedis(host=settings.REDIS_HOST,
 	port=settings.REDIS_PORT, db=settings.REDIS_DB)
 
+
+
 def classify_process():
 	# load the pre-trained Keras model (here we are using a model
 	# pre-trained on ImageNet and provided by Keras, but you can
