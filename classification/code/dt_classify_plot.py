@@ -1,5 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
-import matplotlib.pyplot as plt  
+import matplotlib.pyplot as plt
+
 
 def plot_cm(y, yp):
     from sklearn.metrics import confusion_matrix  # 导入混淆矩阵函数
@@ -15,12 +16,17 @@ def plot_cm(y, yp):
 
     plt.ylabel('True label')  # 坐标轴标签
     plt.xlabel('Predicted label')  # 坐标轴标签
-    return plt, cm
+    return plt
+
+
+def score(y, yp):
+    from sklearn.metrics import accuracy_score
+    return accuracy_score(y, yp)
+
 
 def plot_roc(test, predict_result, label_name):
-    
     from sklearn.metrics import roc_curve  # 导入ROC曲线函数
-    
+
     fpr, tpr, thresholds = roc_curve(
         test[:, 3], predict_result, pos_label=1)
     plt.plot(fpr, tpr, linewidth=2, label='ROC of CART', color='green')  # 作出ROC曲线
@@ -29,5 +35,5 @@ def plot_roc(test, predict_result, label_name):
     plt.ylim(0, 1.05)  # 边界范围
     plt.xlim(0, 1.05)  # 边界范围
     plt.legend(loc=4)  # 图例
-    plt.show()  # 显示作图结果    
+    plt.show()  # 显示作图结果
     return plt

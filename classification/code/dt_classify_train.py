@@ -32,8 +32,11 @@ from sklearn.externals import joblib
 joblib.dump(tree, treefile)
 
 from plot import *  # 导入自行编写的混淆矩阵可视化函数
-plot_cm(train[:, 3], tree.predict(train[:, :3])).show()  # 显示混淆矩阵可视化结果
-# 注意到Scikit-Learn使用predict方法直接给出预测结果。
+pre = tree.predict(train[:, :3])
+rate = 100 * score(train[:, 3], pre)
+plot_cm(train[:, 3], pre).show()  # 显示混淆矩阵可视化结果
+
+# 注意到Scikit-Learn使用predict方法直接给出预测结果
 
 # show ROC
 predict_result = tree.predict_proba(test[:, :3])[:, 1]
@@ -43,6 +46,6 @@ plot_roc(test, predict_result, 'ROC of CART')
 temp1 = test
 show_result = np.c_[temp1, predict_result]
 easysee = show_result[:, [3, 4]]
-rate = ((149+68) / (10+5+149+68)) * 100
+# rate = ((149+68) / (10+5+149+68)) * 100
 print('分类模型的准确率：%f %%' % rate)
-print('over')
+
