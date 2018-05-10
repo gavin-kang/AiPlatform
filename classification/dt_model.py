@@ -13,7 +13,7 @@ print('                                          ')
 print('---------------- 结果 ------------------')
 
 
-datafile = 'K:/work_project/classify/AiPlatform/classification/model.xls'  # 数据名
+datafile = '../data/model.xls'  # 数据名
 data = pd.read_excel(datafile)  # 读取数据，数据的前三列是特征，第四列是标签
 data = data.as_matrix()  # 将表格转换为矩阵
 
