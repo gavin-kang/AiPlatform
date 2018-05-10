@@ -35,7 +35,7 @@ def prepare_image(image, target):
 def homepage():
 	return "Welcome to the PyImageSearch Keras REST API!"
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict/resNet50", methods=["POST"])
 def predict():
 	# initialize the data dictionary that will be returned from the
 	# view
@@ -91,6 +91,10 @@ def predict():
 	# return the data dictionary as a JSON response
 	return flask.jsonify(data)
 
+@app.route("/train/lr", methods=["POST"])
+def LinearRegression():
+
+	return 'a'
 # for debugging purposes, it's helpful to start the Flask testing
 # server (don't use this for production
 if __name__ == "__main__":

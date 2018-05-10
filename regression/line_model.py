@@ -59,7 +59,7 @@ def line_model():
         sess.run(w_temperature),"b: %f" %
         sess.run(b),"cost: %f" % sess.run(cost, feed_dict = feed))
 
-    saver_path = saver.save(sess, "projects/line/model/model.ckpt")
+    saver_path = saver.save(sess, "../regression/model/model.ckpt")
     print("Model saved in file:", saver_path)
 
 def load_model(x_ic, x_wl, x_wv, x_t):
@@ -76,7 +76,7 @@ def load_model(x_ic, x_wl, x_wv, x_t):
 
     saver = tf.train.Saver()
     with tf.Session() as sess:    
-        saver.restore(sess, "projects/line/model/model.ckpt")
+        saver.restore(sess, "../regression/model/model.ckpt")
         return  sess.run(y, feed_dict={x_installed_capacity:[[x_ic]], 
             x_water_level:[[x_wl]], x_water_volume:[[x_wv]], x_temperature:[[x_t]]})
 
