@@ -31,4 +31,4 @@ def dt_classify(datapath='../data/test.xls'):
     return rate, classify_result
 
 # 测试
-dt_classify()
+# dt_classify()
