@@ -1,6 +1,7 @@
 # import the necessary packages
 from keras.applications import ResNet50
 from keras.applications import imagenet_utils
+from sklearn.externals import joblib
 import numpy as np
 import settings
 import helpers
@@ -11,7 +12,6 @@ import json
 # connect to Redis server
 db = redis.StrictRedis(host=settings.REDIS_HOST,
 	port=settings.REDIS_PORT, db=settings.REDIS_DB)
-
 
 
 def classify_process():
@@ -79,6 +79,19 @@ def classify_process():
 
 		# sleep for a small amount
 		time.sleep(settings.SERVER_SLEEP)
+
+
+def dt_classify(decline_index, loss_index, alarm_index):
+
+    dt_model = joblib.load('./classification/tmp/tree_best.pkl')
+    data = np.matrix([[decline_index, loss_index, alarm_index]])
+    yp = dt_model.predict(data)
+    yp_proba = dt_model.predict_proba(data)
+    # test：
+    # For example: (5,1,1)、(4,1,3)、(5,1,3)
+    # dt_classify(4,1,3)
+    return yp, yp_proba
+
 
 # if this is the main thread of execution start the model server
 # process
