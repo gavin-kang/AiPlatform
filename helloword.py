@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-
+from run_model_server import *
 app = Flask(__name__)
 
 tasks = [
@@ -25,6 +25,12 @@ def index():
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
     return jsonify({'tasks': tasks})
+
+
+@app.route('/classify')
+def classify():
+    return dt_classify()
+
 
 if __name__=="__main__":
     app.run()
