@@ -10,58 +10,37 @@ import tensorflow as tf
 import os
 
 
-def raw_dataframe(URL, column_types, na_val):
+def raw_dataframe(file_path):
     """get file data as dataframe
     args：
       URL:file url，web path support
       column_types: all the columns in the file
       na_val: the string for none values in the file
     """
-    file_name = os.path.split(URL)[-1]
-    file_ext = file_name.split('.')[-1]
-    path = tf.keras.utils.get_file(file_name, URL)
-    ordered_column = collections.OrderedDict(column_types)
+    file_ext = os.path.splitext(file_path)[-1]
     if file_ext == '.csv':
-        df = pd.read_csv(path, names=ordered_column.keys(),
-                         dtype=ordered_column, na_values=na_val)
+        df = pd.read_csv(file_path)
     elif file_ext == '.xls' or file_ext == '.xlsx':
-        df = pd.read_excel(path, names=ordered_column.keys(),
-                           dtype=ordered_column, na_values=na_val)
+        df = pd.read_excel(file_path)
     else:
         raise Exception("仅支持excel和csv格式的数据类型", file_ext)
     return df
 
 
-def load_data(URL, column_types, na_val,y_name="y", train_fraction=0.7, seed=None):
+def load_data(file_data=None,file_path=None,y_name="Y", train_fraction=0.7, seed=None):
     """
-    load data from file
+    加载数据集
     """
-    # Load the raw data columns.
-    file_name = os.path.split(URL)[-1]
-    file_ext = file_name.split('.')[-1]
-    path = tf.keras.utils.get_file(file_name, URL)
-    ordered_column = collections.OrderedDict(column_types)
-    if file_ext == '.csv':
-        data = pd.read_csv(path, names=ordered_column.keys(),
-                         dtype=ordered_column, na_values=na_val)
-    elif file_ext == '.xls' or file_ext == '.xlsx':
-        data = pd.read_excel(path, names=ordered_column.keys(),
-                           dtype=ordered_column, na_values=na_val)
+    if file_data:
+        data=file_data
     else:
-        raise Exception("仅支持excel和csv格式的数据类型", file_ext)
-
-    # Delete rows with unknowns
+        data=raw_dataframe(file_path)
     data = data.dropna()
-    # Shuffle the data
     np.random.seed(seed)
-    # Split the data into train/test subsets.
     x_train = data.sample(frac=train_fraction, random_state=seed)
     x_test = data.drop(x_train.index)
-
-    # Extract the label from the features DataFrame.
     y_train = x_train.pop(y_name)
     y_test = x_test.pop(y_name)
-
     return (x_train, y_train), (x_test, y_test)
 
 
@@ -80,4 +59,12 @@ def make_dataset(x, y=None):
         items.append(np.array(y, dtype=np.float32))
 
     # Create a Dataset of slices
+
+
+
+
+
+
+
+
     return tf.data.Dataset.from_tensor_slices(tuple(items))

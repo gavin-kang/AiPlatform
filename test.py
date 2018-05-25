@@ -1,4 +1,2 @@
-import pandas as pd
-
-df=pd.read_excel('adFeature.xlsx')
-print(df)
+from run_model_tarining import train
+res=train(y_lable="PE")

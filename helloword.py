@@ -1,6 +1,8 @@
+import flask
 from flask import Flask, jsonify
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 tasks = [
     {
@@ -19,12 +21,17 @@ tasks = [
 
 @app.route('/')
 def index():
-    return 'Hello,world,flask!'
+    return 'Hello,This is my api address!'
 
 
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
     return jsonify({'tasks': tasks})
 
+@app.route('/test',methods=['POST'])
+def test():
+    tmp=flask.request.form["features"]
+    print(tmp)
+    return "succeed"
 if __name__=="__main__":
     app.run()

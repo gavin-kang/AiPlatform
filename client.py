@@ -1,10 +1,6 @@
 import requests
 
-def main():
-  endpoint = "http://127.0.0.1:8500"
-  json_data = {"model_name": "default", "data": {"keys": [[1], [8]], "features": [[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], [2.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]]} }
-  result = requests.post(endpoint, json=json_data)
-  print(result.text)
-
-if __name__ == "__main__":
-  main()
+endpoint = "http://127.0.0.1:5000/test"
+json_data = {"features": [[20.3, 60.0, 1008.0, 85.0, ], [26, 70, 1152.0, 60.0]],"steps":100}
+result = requests.post(endpoint, ).json()
+print(result)
