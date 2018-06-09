@@ -2,7 +2,7 @@
 # @Time    : 2018/6/8 11:26
 # @Author  : yuanjing liu
 # @Email   : lauyuanjing@163.com
-# @File    : BetaFit_test.py
+# @File    : DataPlot.py
 # @Software: PyCharm
 
 from scipy.optimize import fmin
@@ -14,7 +14,7 @@ import pandas as pd
 import seaborn as sns
 import os
 
-os.chdir('C:\\Users\\T480S\\work\\DataAnalysisStudy\\beta')
+os.chdir('C:\\Users\\T480S\\work\\AiPlatform\\BetaFit')
 total_data = pd.read_csv("data.csv")
 
 # 解决中文显示问题

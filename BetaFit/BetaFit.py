@@ -38,8 +38,9 @@ import numpy as np
 # plt.show()
 
 
-def betaNLL(param,*args):
-    '''Negative log likelihood function for beta
+def betaNLL(param, *args):
+    '''
+    Negative log likelihood function for beta
     <param>: list for parameters to be fitted.
     <args>: 1-element array containing the sample data.
 
@@ -55,34 +56,35 @@ def betaNLL(param,*args):
     nll=-1*np.sum(lg)
     return nll
 
-#-------------------Sample data-------------------
-data=beta.rvs(8,4,loc=0,scale=1,size=500)
 
-#----------------Normalize to [0,1]----------------
-#data=(data-numpy.min(data))/(numpy.max(data)-numpy.min(data))
+# -------------------Sample data-------------------
+data = beta.rvs(8,4,loc=0,scale=1,size=500)
 
-#----------------Fit using moments----------------
+# ----------------Normalize to [0,1]----------------
+# data=(data-numpy.min(data))/(numpy.max(data)-numpy.min(data))
+
+# ----------------Fit using moments----------------
 mean=np.mean(data)
 var=np.var(data,ddof=1)
 alpha1=mean**2*(1-mean)/var-mean
 beta1=alpha1*(1-mean)/mean
 
-#------------------Fit using mle------------------
+# ------------------Fit using mle------------------
 result=fmin(betaNLL,[1,1],args=(data,))
 alpha2,beta2=result
 
-#----------------Fit using beta.fit----------------
+# ----------------Fit using beta.fit----------------
 alpha3,beta3,xx,yy=beta.fit(data)
 
 print('\n# alpha,beta from moments:',alpha1,beta1)
 print('# alpha,beta from mle:',alpha2,beta2)
 print('# alpha,beta from beta.fit:',alpha3,beta3)
 
-#-----------------------Plot-----------------------
+# -----------------------Plot-----------------------
 plt.hist(data,bins=30,normed=True)
 fitted = lambda x,a,b:gammaf(a+b)/gammaf(a)/gammaf(b)*x**(a-1)*(1-x)**(b-1) #pdf of beta
 
-xx=np.linspace(0,max(data),len(data))
+xx = np.linspace(0, max(data), len(data))
 plt.plot(xx,fitted(xx,alpha1,beta1),'g')
 plt.plot(xx,fitted(xx,alpha2,beta2),'b')
 plt.plot(xx,fitted(xx,alpha3,beta3),'r')
