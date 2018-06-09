@@ -7,6 +7,7 @@
 
 from scipy.stats import beta
 from scipy.special import gamma as gammaf
+import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -34,6 +35,13 @@ def betaNLL(param, *args):
     return nll
 
 
+# 滤波函数
+def HpFilter(dta):
+    cycle, trend = sm.tsa.filters.hpfilter(dta, 15000)
+    return cycle, trend
+
+
+# model运行主函数
 def BetaModel(data):
 
     def fitted(x, a, b):
@@ -58,22 +66,4 @@ def BetaModel(data):
     return a, b, d1, d2
 
 
-# 测试
-data = total_data['1号机组调速器压力油罐油位'][40000:]
-a, b, d1, d2 = BetaModel(data)
 
-# 画图
-# 1 拟合图
-# 2 原始直方图
-plt.figure(2)
-plt.hist(data, bins=30, normed=True)
-plt.vlines(d1, 0, 0.006, colors="r", linestyles="dashed")
-plt.vlines(d2, 0, 0.006, colors="r", linestyles="dashed")
-plt.show()
-
-plt.figure(3)
-xline = range(len(total_data['1号机组调速器压力油罐油位']))
-plt.plot(xline, total_data['1号机组调速器压力油罐油位'])
-plt.hlines(d1, 0, max(xline), colors="r", linestyles="dashed")
-plt.hlines(d2, 0, max(xline), colors="r", linestyles="dashed")
-plt.show()

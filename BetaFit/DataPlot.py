@@ -41,6 +41,7 @@ plt.title('1号机组调速器压力油罐油位')
 
 plt.subplot(313)
 plt.plot(xt, total_data['1号机组调速器回油箱油位'])
+# plt.ylim(40000, 41000)
 plt.title('1号机组调速器回油箱油位')
 plt.show()
 
