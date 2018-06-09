@@ -5,7 +5,6 @@
 # @File    : model.py
 # @Software: PyCharm
 
-from scipy.optimize import fmin
 from scipy.stats import beta
 from scipy.special import gamma as gammaf
 import matplotlib.pyplot as plt
