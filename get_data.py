@@ -36,6 +36,8 @@ def load_data(file_data=None,file_path=None,y_name="Y", train_fraction=0.7, seed
     else:
         data=raw_dataframe(file_path)
     data = data.dropna()
+    # 数据归一化
+    data=data.apply(lambda x: (x - np.min(x)) / (np.max(x) - np.min(x)))
     np.random.seed(seed)
     x_train = data.sample(frac=train_fraction, random_state=seed)
     x_test = data.drop(x_train.index)
