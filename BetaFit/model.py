@@ -60,6 +60,7 @@ def BetaModel(data):
     return a, b, d1, d2
 
 
+
 def abnormal(shuju, qujian1, qujian2):
     zc, yc = [], []
     for i in range(len(shuju)):
@@ -68,3 +69,4 @@ def abnormal(shuju, qujian1, qujian2):
         else:
             yc.append(shuju.values[i])
     return zc, yc
+
