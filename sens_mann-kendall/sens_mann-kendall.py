@@ -80,31 +80,77 @@ def CUBK(x):
 
     return list
 
+def exponential_smoothing(alpha, s):
+    s2 = np.zeros(s.shape)
+    s2[0] = s[0]
+    for i in range(1, len(s2)):
+        s2[i] = alpha*s[i]+(1-alpha)*s2[i-1]
+
+    return s2 
+
+def es(list_actual_value):
+    alpha = .70
+    actual_value_data=np.array(list_actual_value)
+    s_single = exponential_smoothing(alpha,actual_value_data)
+    s_double = exponential_smoothing(alpha,s_single)
+    a_double = 2*s_single-s_double
+    b_double = (alpha/(1-alpha))*(s_single-s_double)
+    s_pre_double = np.zeros(s_double.shape)
+    for i in range(1, len(actual_value_data)):
+        s_pre_double[i] = a_double[i-1]+b_double[i-1]
+
+    sp_list = s_pre_double.tolist()
+    sp_list.remove(sp_list[0])
+    pre_next = a_double[-1]+b_double[-1]*1
+    pre_next_two = a_double[-1]+b_double[-1]*2
+    sp_list.append(pre_next)
+    sp_list.append(pre_next_two)
+
+    return sp_list
 
 def LoadCSVData(path):
     list=[]
-    data = pd.read_csv(path,usecols=[0])
+    data = pd.read_csv(path,usecols=[1])
     for index,row in data.iterrows():
-        if index > 22 and index < 61:
-            #print(row['h'])
-            list.append(row['h'])
+        if index >= 0 and index < 30:
+            #print(row['1'])
+            list.append(row['1'])
 
     return list
 
-list_data=LoadCSVData('projects/sens_mann-kendall/data/data.csv')
+def WriteCSVData(list, path):
+    data = pd.DataFrame(list)
+    data.to_csv(path,index=False,sep=',')
+
+def show_data(list_actual_value, sp_list):
+    plt.figure(figsize=(14, 6), dpi=80)
+    plt.plot(list_actual_value, color='blue', label="actual value")
+    plt.plot(sp_list,color='red',label="predictive value")    
+    plt.legend(loc='lower right')
+    plt.title('Projects')
+    plt.ylabel('number')
+    plt.show()
+
+list_data=LoadCSVData('projects/AiPlatform/sens_mann-kendall/data/train_data.csv')
+
 
 (slope,zc1)=mk(list_data)
-
 list_ufk=CUFK(list_data)
 list_ubk=CUBK(list_data)
 
 print("slope: ", slope)
 print("Z: ", zc1)
 
+plt.figure(figsize=(14, 6), dpi=80)
 plt.plot(list_ubk,'r', label='ubk')
 plt.plot(list_ufk,'b',label='ufk')
 plt.legend(bbox_to_anchor=[0.3, 1])
 plt.title("Sen's & Mann-Kendall")
+plt.legend(loc='lower right')
 plt.grid()  
-plt.show()
+#plt.show()
+
+sp_list = es(list_data)
+#WriteCSVData(sp_list, "projects/AiPlatform/sens_mann-kendall/data/data_sp.csv")
+show_data(list_data, sp_list)
 
