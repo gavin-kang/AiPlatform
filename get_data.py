@@ -34,7 +34,7 @@ def load_data(file_data=None,file_path=None,y_name="Y", train_fraction=0.7, seed
     if file_data:
         data=file_data
     else:
-        data=raw_dataframe(file_path)
+        data=pd.read_csv(file_path)
     data = data.dropna()
     np.random.seed(seed)
     x_train = data.sample(frac=train_fraction, random_state=seed)
@@ -59,12 +59,4 @@ def make_dataset(x, y=None):
         items.append(np.array(y, dtype=np.float32))
 
     # Create a Dataset of slices
-
-
-
-
-
-
-
-
     return tf.data.Dataset.from_tensor_slices(tuple(items))

@@ -144,8 +144,7 @@ def predict_lr():
     pre = run_model_tarining.predict_lr(df)
     result_data["predict_res"] = json.dumps(pre, cls=MyEncoder)
     result_data["success"] = True
-    return "succeed"
-    # return  flask.jsonify(result_data)
+    return  str(result_data)
 
 
 @app.route("/test", methods=["POST"])
@@ -154,9 +153,8 @@ def test():
     try:
         #训练次数
         steps = flask.request.form["steps"]
-        res = run_model_tarining.train(file_path='F:\AIPlatform\AiPlatform\data\data.xls', y_lable='PE',
+        res = run_model_tarining.train(file_path='data\data.xls', y_lable='PE',
                                        train_tpye='lr', steps=int(steps))
-        print(json.dumps(dict(res)))
         return "succeed"
     except:
         return "请求参数异常！"
@@ -165,4 +163,4 @@ def test():
 # 本地开发调试用，如果部署到生成环境，请使用ngnix Tomcat
 if __name__ == "__main__":
     print("* Starting web service...")
-    app.run()
+    app.run(host="192.168.50.32",port=5000)

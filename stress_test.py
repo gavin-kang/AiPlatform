@@ -9,7 +9,7 @@ import time
 # initialize the Keras REST API endpoint URL along with the input
 # image path
 KERAS_REST_API_URL = "http://localhost:5000/predict"
-IMAGE_PATH = "jemma.png"
+IMAGE_PATH = "data/jemma.png"
 
 # initialize the number of requests for the stress test along with
 # the sleep amount between requests
@@ -27,6 +27,7 @@ def call_predict_endpoint(n):
 	# ensure the request was sucessful
 	if r["success"]:
 		print("[INFO] thread {} OK".format(n))
+
 
 	# otherwise, the request failed
 	else:

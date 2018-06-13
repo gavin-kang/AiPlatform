@@ -44,7 +44,7 @@ model.fit(x_train,y_train,batch_size=batch_size,epochs=epochs,verbose=1,validati
 
 # 保存模型
 model.save('./model/model.h5')
-model.save_weights('./model/model_weights.h5')
+model.save_weights('./model/weights.h5')
 # 评估模型
 acc=model.evaluate(x_test,y_test,verbose=0)
 

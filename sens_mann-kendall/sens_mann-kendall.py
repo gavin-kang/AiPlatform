@@ -91,7 +91,7 @@ def LoadCSVData(path):
 
     return list
 
-list_data=LoadCSVData('projects/sens_mann-kendall/data/data.csv')
+list_data=LoadCSVData('../sens_mann-kendall/data/data.csv')
 
 (slope,zc1)=mk(list_data)
 
