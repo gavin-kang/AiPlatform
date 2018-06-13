@@ -5,20 +5,15 @@
 # @File    : DataPlot.py
 # @Software: PyCharm
 
-from scipy.optimize import fmin
-from scipy.stats import beta
-from scipy.special import gamma as gammaf
+
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
-import os
 
-os.chdir('C:\\Users\\T480S\\work\\AiPlatform\\BetaFit')
-total_data = pd.read_csv("data.csv")
+total_data = pd.read_csv("../BetaFit/data.csv")
 
 # 解决中文显示问题
-plt.rcParams['font.sans-serif']=['SimHei']
+plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
 plt.figure(1)

@@ -10,11 +10,6 @@ from scipy.special import gamma as gammaf
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import os
-
-os.chdir('C:\\Users\\T480S\\work\\AiPlatform\\BetaFit')
-total_data = pd.read_csv("data.csv")
 
 
 def MaxMinNormalization(x):
@@ -57,13 +52,19 @@ def BetaModel(data):
     plt.plot(xx, fitted(xx, a, b), 'g')
     plt.show()
 
-    alpha = 0.99
+    alpha = 0.95
     q1, q2 = beta.interval(alpha, a, b, loc=0, scale=1)
 
     d1 = q1*(max(data)-min(data))+min(data)
     d2 = q2*(max(data)-min(data))+min(data)
-
     return a, b, d1, d2
 
 
-
+def abnormal(shuju, qujian1, qujian2):
+    zc, yc = [], []
+    for i in range(len(shuju)):
+        if (shuju.values[i] > qujian1 and shuju.values[i] < qujian2):
+            zc.append(shuju.values[i])
+        else:
+            yc.append(shuju.values[i])
+    return zc, yc
