@@ -118,6 +118,7 @@ def LoadCSVData(path):
 
     return list
 
+<<<<<<< HEAD
 def WriteCSVData(list, path):
     data = pd.DataFrame(list)
     data.to_csv(path,index=False,sep=',')
@@ -132,6 +133,9 @@ def show_data(list_actual_value, sp_list):
     plt.show()
 
 list_data=LoadCSVData('projects/AiPlatform/sens_mann-kendall/data/train_data.csv')
+=======
+list_data=LoadCSVData('../sens_mann-kendall/data/data.csv')
+>>>>>>> c0365aaca075e62d2e7f73ce31af4a6073e32fb9
 
 
 (slope,zc1)=mk(list_data)

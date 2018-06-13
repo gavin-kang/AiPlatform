@@ -9,19 +9,16 @@ import tensorflow as tf
 import random
 import get_data
 import time
-parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', default=100, type=int, help='batch size')
-parser.add_argument('--train_steps', default=100, type=int,
-                    help='number of training steps')
+
 
 
 def from_dataset(ds):
     return lambda: ds.make_one_shot_iterator().get_next()
 
 
-def train(file_data=None, file_path="F:\AIPlatform\AiPlatform\data\data.xls", train_tpye='lr', y_lable='PE',steps=100):
+def train(file_data=None, file_path="/Users/jayden/IdeaProjects/AiPlatform/data/data.xls", train_tpye='lr', y_lable='PE',steps=100):
     """使用tensorflow官网推荐的Estimator高级接口编写模型"""
-    args = parser.parse_args()
+    # args = parser.parse_args()
     if file_data:
         (train_x, train_y), (test_x, test_y) = get_data.load_data(file_data=file_data)
     elif file_path:
@@ -31,10 +28,10 @@ def train(file_data=None, file_path="F:\AIPlatform\AiPlatform\data\data.xls", tr
 
     train = (
         get_data.make_dataset(train_x, train_y)
-            .shuffle(10000).batch(args.batch_size)
+            .shuffle(10000).batch(100)
             .repeat())
 
-    test = get_data.make_dataset(test_x, test_y).batch(args.batch_size)
+    test = get_data.make_dataset(test_x, test_y).batch(100)
 
     feature_columns = []
     for column in train_x.columns.values:
@@ -42,7 +39,7 @@ def train(file_data=None, file_path="F:\AIPlatform\AiPlatform\data\data.xls", tr
     myhook = WriteLog()
     model = tf.estimator.LinearRegressor(feature_columns=feature_columns, model_dir='lr_model')
     if train_tpye == 'classifier':
-        model = tf.estimator.DNNClassifier(hidden_units=[3, 2], feature_columns=feature_columns, model_dir='model')
+        model = tf.estimator.DNNClassifier(hidden_units=[3, 2], feature_columns=feature_columns, model_dir='cl_model')
     model.train(input_fn=from_dataset(train), steps=steps, hooks=[myhook])
     eval_result = model.evaluate(input_fn=from_dataset(test))
     return eval_result
