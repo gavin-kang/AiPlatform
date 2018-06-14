@@ -110,7 +110,7 @@ def es(list_actual_value):
 
 def LoadCSVData(path):
     list=[]
-    data = pd.read_csv(path,usecols=[1])
+    data = pd.read_csv(path)
     for index,row in data.iterrows():
         if index >= 0 and index < 30:
             #print(row['1'])
@@ -126,18 +126,19 @@ def show_data(list_actual_value, sp_list):
     plt.figure(figsize=(14, 6), dpi=80)
     plt.plot(list_actual_value, color='blue', label="actual value")
     plt.plot(sp_list,color='red',label="predictive value")    
-    plt.legend(loc='lower right')
+    # plt.legend(loc='lower right')
+    plt.legend(bbox_to_anchor=[0.3, 1])
     plt.title('Projects')
     plt.ylabel('number')
     plt.show()
 
-list_data=LoadCSVData('projects/AiPlatform/sens_mann-kendall/data/train_data.csv')
+list_data=LoadCSVData('./data/show_data.csv')
 
 (slope,zc1)=mk(list_data)
 list_ufk=CUFK(list_data)
 list_ubk=CUBK(list_data)
 
-print("slope: ", slope)
+print(": ", slope)
 print("Z: ", zc1)
 
 plt.figure(figsize=(14, 6), dpi=80)
@@ -145,11 +146,11 @@ plt.plot(list_ubk,'r', label='ubk')
 plt.plot(list_ufk,'b',label='ufk')
 plt.legend(bbox_to_anchor=[0.3, 1])
 plt.title("Sen's & Mann-Kendall")
-plt.legend(loc='lower right')
+# plt.legend(loc='lower right')
 plt.grid()  
-#plt.show()
+plt.show()
 
 sp_list = es(list_data)
-WriteCSVData(sp_list, "projects/AiPlatform/sens_mann-kendall/data/data_sp.csv")
+# WriteCSVData(sp_list, "projects/AiPlatform/sens_mann-kendall/data/data_sp.csv")
 show_data(list_data, sp_list)
 
