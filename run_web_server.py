@@ -153,8 +153,7 @@ def test():
     try:
         #训练次数
         steps = flask.request.form["steps"]
-        res = run_model_tarining.train(file_path='data\data.xls', y_lable='PE',
-                                       train_tpye='lr', steps=int(steps))
+        res = run_model_tarining.train(steps=int(steps))
         return "succeed"
     except:
         return "请求参数异常！"
@@ -163,4 +162,5 @@ def test():
 # 本地开发调试用，如果部署到生成环境，请使用ngnix Tomcat
 if __name__ == "__main__":
     print("* Starting web service...")
-    app.run(host="192.168.50.32",port=5000)
+    app.run()
+
