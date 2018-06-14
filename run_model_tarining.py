@@ -16,7 +16,7 @@ def from_dataset(ds):
     return lambda: ds.make_one_shot_iterator().get_next()
 
 
-def train(file_data=None, file_path="/Users/jayden/IdeaProjects/AiPlatform/data/data.xls", train_tpye='lr', y_lable='PE',steps=100):
+def train(file_data=None, file_path="data/data.csv", train_tpye='lr', y_lable='PE',steps=200):
     """使用tensorflow官网推荐的Estimator高级接口编写模型"""
     # args = parser.parse_args()
     if file_data:
@@ -40,7 +40,7 @@ def train(file_data=None, file_path="/Users/jayden/IdeaProjects/AiPlatform/data/
     model = tf.estimator.LinearRegressor(feature_columns=feature_columns, model_dir='lr_model')
     if train_tpye == 'classifier':
         model = tf.estimator.DNNClassifier(hidden_units=[3, 2], feature_columns=feature_columns, model_dir='cl_model')
-    model.train(input_fn=from_dataset(train), steps=steps, hooks=[myhook])
+    model.train(input_fn=from_dataset(train), steps=steps,hooks=[myhook])
     eval_result = model.evaluate(input_fn=from_dataset(test))
     return eval_result
 
@@ -96,4 +96,3 @@ class WriteLog(tf.train.SessionRunHook):
         sess.close()
         self._acc += random.uniform(-0.004, 0.007)
         time.sleep(0.1)
-

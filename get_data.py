@@ -34,7 +34,7 @@ def load_data(file_data=None,file_path=None,y_name="Y", train_fraction=0.7, seed
     if file_data:
         data=file_data
     else:
-        data=pd.read_csv(file_path)
+        data=raw_dataframe(file_path)
     data = data.dropna()
     # 数据归一化
     data=data.apply(lambda x: (x - np.min(x)) / (np.max(x) - np.min(x)))
