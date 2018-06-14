@@ -2,3 +2,6 @@
 /__pycache__
 /model
 /lr_model
+/.ipynb_checkpoints
+/keras/xiaowan/model
+/keras/xiaowan/data

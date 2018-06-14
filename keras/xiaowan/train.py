@@ -6,7 +6,7 @@
 @time: 2018/06/{DAY} 
 """
 
-import  keras
+import keras
 from keras.models import Sequential
 from keras.layers import Dense,Dropout
 from keras.utils import plot_model
