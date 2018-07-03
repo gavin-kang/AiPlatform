@@ -82,5 +82,5 @@ plt.xlabel('训练次数')
 plt.legend(['训练', '验证'], loc='lower left')
 
 plt.show()
-#
-fig.savefig('acc.png')
+
+# fig.savefig('acc.png')
