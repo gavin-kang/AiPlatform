@@ -138,8 +138,8 @@ list_data=LoadCSVData('./data/show_data.csv')
 list_ufk=CUFK(list_data)
 list_ubk=CUBK(list_data)
 
-print(": ", slope)
-print("Z: ", zc1)
+print("斜率: ", slope)
+print("统计检验量: ", zc1)
 
 plt.figure(figsize=(14, 6), dpi=80)
 plt.plot(list_ubk,'r', label='ubk')
