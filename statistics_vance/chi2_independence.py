@@ -2,7 +2,7 @@
 # @Time    : 2018/6/29 18:08
 # @Author  : yuanjing liu
 # @Email   : lauyuanjing@163.com
-# @File    : 4.py
+# @File    : chi2_independence.py
 # @Software: PyCharm
 
 # 卡方独立性检验
@@ -30,11 +30,11 @@ expctd--- 原数据数组同维度的对应理论值
 （3）应用场景
 要求样本含量应大于40且每个格子中的理论频数不应小于5
 
-理论知识详见博客：
+理论知识详见博客：https://www.cnblogs.com/Yuanjing-Liu/p/9252844.html
 '''
 
 
-def chi2_independence(alpha, data):
+def chi2_independence(data, alpha):
     g, p, dof, expctd = chi2_contingency(data)
 
     if dof == 0:
@@ -56,4 +56,4 @@ def chi2_independence(alpha, data):
 # test
 alpha1 = 0.05  # 置信度，常用0.01，0.05，用于确定拒绝域的临界值
 data1 = np.array([[442, 514], [38, 6]])
-g, p, dof, re, expctd = chi2_independence(alpha1, data1)
+g1, p1, dof1, re1, expctd1 = chi2_independence(alpha1, data1)
