@@ -66,8 +66,8 @@ def oc_clasf(total_data):
 
     # 油压分类
     q = 10000
-    xshow1 = x1[:q]
-    cl2 = ypred[:q]
+    xshow1 = x1[:]
+    cl2 = ypred[:]
     plt.scatter(range(len(xshow1)), xshow1, c=cl2)
     plt.show()
 
