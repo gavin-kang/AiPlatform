@@ -1,0 +1,8 @@
+/.idea
+/__pycache__
+/model
+/.ipynb_checkpoints
+/keras/xiaowan/data
+/model_show.ipynb
+/data
+
