@@ -1,0 +1,6 @@
+flask
+flasgger
+flask_cors
+gunicorn
+gevent
+redis

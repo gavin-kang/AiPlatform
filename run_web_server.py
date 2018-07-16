@@ -5,7 +5,10 @@ from PIL import Image
 import numpy as np
 import settings
 import helpers
+<<<<<<< HEAD
 import flask
+=======
+>>>>>>> a6a998d957981023730d032cf8f4950b0c7f7c60
 import redis
 import uuid
 import time
@@ -13,10 +16,20 @@ import json
 import io
 import pandas as pd
 import run_model_tarining
+<<<<<<< HEAD
 from flask_cors import CORS
 
 # initialize our Flask application and Redis server
 app = flask.Flask(__name__)
+=======
+import flask
+from flask_cors import CORS
+from flasgger import Swagger,swag_from
+
+# initialize our Flask application and Redis server
+app = flask.Flask(__name__)
+swagger=Swagger(app)
+>>>>>>> a6a998d957981023730d032cf8f4950b0c7f7c60
 CORS(app, supports_credentials=True)
 db = redis.StrictRedis(host=settings.REDIS_HOST,
                        port=settings.REDIS_PORT, db=settings.REDIS_DB)
@@ -147,9 +160,18 @@ def predict_lr():
     return  str(result_data)
 
 
+<<<<<<< HEAD
 @app.route("/test", methods=["POST"])
 def test():
     """项目演示示例"""
+=======
+@app.route("/test/<steps>", methods=["POST"])
+@swag_from('swagger/swagger.yaml')
+def test():
+    """小湾原型演示例子
+
+    """
+>>>>>>> a6a998d957981023730d032cf8f4950b0c7f7c60
     try:
         #训练次数
         steps = flask.request.form["steps"]

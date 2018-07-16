@@ -1,11 +1,19 @@
 import flask
 from flask import Flask, jsonify
 
+<<<<<<< HEAD
 from flask_cors import CORS
 
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
+=======
+# from flask_cors import CORS
+
+
+app = Flask(__name__)
+# CORS(app, supports_credentials=True)
+>>>>>>> a6a998d957981023730d032cf8f4950b0c7f7c60
 
 tasks = [
     {
