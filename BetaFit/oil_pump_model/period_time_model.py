@@ -64,3 +64,10 @@ gap1 = pd.Series(date_gap(time1))/60
 
 end_time = datetime.datetime.now()
 print('程序运行时间：%d s' % (end_time - start_time).seconds)
+
+
+# gap0.to_csv('./data/gap0.csv', encoding='utf-8', index=False)
+# gap1.to_csv('./data/gap1.csv', encoding='utf-8', index=False)
+
+
+

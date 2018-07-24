@@ -39,13 +39,15 @@ def oc_clasf(total_data):
     # # 散点图展示
     # # x2和x3
     # plt.scatter(x1[:], x2[:])
+    # plt.xlabel('1号机组调速器压力油罐油压')
+    # plt.ylabel('1号机组有功(有功变送器2)')
     # plt.show()
     # # x1,x2,x3
     # ax = plt.subplot(111, projection='3d')
     # ax.scatter(x2, x3, x1)
-    # ax.set_zlabel('Z')  # 坐标轴
-    # ax.set_ylabel('Y')
-    # ax.set_xlabel('X')
+    # ax.set_zlabel('1号机组调速器压力油罐油压')  # 坐标轴
+    # ax.set_ylabel('1号机组导叶开度(SJ30)')
+    # ax.set_xlabel('1号机组有功(有功变送器2)')
     # plt.show()
 
     # k-means 聚类
